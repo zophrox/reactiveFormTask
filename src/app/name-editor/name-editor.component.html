@@ -1,0 +1,14 @@
+<div class="form">
+    <mat-form-field appearance="fill">
+        <mat-label>Name:</mat-label>
+        <input matInput [formControl]="name">
+      </mat-form-field>
+    
+    
+      <p>Value: {{name.value}}</p>
+    
+      <button mat-flat-button color="primary" (click)="updateName()">Update Name</button>
+</div>
+
+
+  
