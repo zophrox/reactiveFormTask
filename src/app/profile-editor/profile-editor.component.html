@@ -1,18 +1,86 @@
-<form [formGroup]="profileForm" class="form" (ngSubmit)="onSubmit()">
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>First Name:</mat-label>
-      <input matInput id="first-name" type="text" formControlName="firstName" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name:</mat-label>
-      <input matInput id="last-name" type="text" formControlName="lastName" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-  </p>
+<div class="form">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name:</mat-label>
+        <input
+          matInput
+          id="first-name"
+          type="text"
+          formControlName="firstName"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name:</mat-label>
+        <input matInput id="last-name" type="text" formControlName="lastName" />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <div formGroupName="address">
+      <h2>Address:</h2>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Street:</mat-label>
+          <input matInput id="street" type="text" formControlName="street" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>City:</mat-label>
+          <input matInput id="city" type="text" formControlName="city" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>State:</mat-label>
+          <input matInput id="state" type="text" formControlName="state" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Zip:</mat-label>
+          <input matInput id="zip" type="text" formControlName="zip" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+    </div>
 
-  <button mat-flat-button color="primary">Submit</button>
-</form>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="!profileForm.valid"
+    >
+      Submit
+    </button>
+    <div formArrayName="aliases">
+      <h2>Aliases</h2>
+      <button mat-flat-button color="warn" (click)="addAlias()">+ Add another alias</button>
+    
+      <div *ngFor="let alias of aliases.controls; let i=index">
+         <!-- The repeated alias template -->
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label >Alias {{i + 1}}:</mat-label>
+            <input matInput  type="text" [formControlName]="i"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </p>
+       
+      </div>
+    </div>
+  </form>
+  <div class="updateProfileButton">
+    <button mat-flat-button color="accent" (click)="updateProfile()">
+      Update Profile
+    </button>
+  </div>
+</div>
+<p>Form Value: {{ profileForm.value | json }}</p>
+<p>Form Status: {{ profileForm.status }}</p>
