@@ -51,6 +51,22 @@
       </p>
     </div>
 
+    <div formArrayName="aliases">
+      <h2>Aliases</h2>
+      <button mat-flat-button color="primary" (click)="addAlias()">
+        + Add another alias
+      </button>
+
+      <div *ngFor="let alias of aliases.controls; let i = index">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Alias {{ i + 1 }}:</mat-label>
+            <input matInput type="text" [formControlName]="i" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </p>
+      </div>
+    </div>
     <button
       mat-flat-button
       color="primary"
@@ -59,22 +75,6 @@
     >
       Submit
     </button>
-    <div formArrayName="aliases">
-      <h2>Aliases</h2>
-      <button mat-flat-button color="warn" (click)="addAlias()">+ Add another alias</button>
-    
-      <div *ngFor="let alias of aliases.controls; let i=index">
-         <!-- The repeated alias template -->
-        <p>
-          <mat-form-field appearance="outline">
-            <mat-label >Alias {{i + 1}}:</mat-label>
-            <input matInput  type="text" [formControlName]="i"/>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          </mat-form-field>
-        </p>
-       
-      </div>
-    </div>
   </form>
   <div class="updateProfileButton">
     <button mat-flat-button color="accent" (click)="updateProfile()">
